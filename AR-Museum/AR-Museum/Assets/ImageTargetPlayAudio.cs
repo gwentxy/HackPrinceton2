@@ -7,6 +7,7 @@ public class ImageTargetPlayAudio : MonoBehaviour,
 ITrackableEventHandler
 {
 	private TrackableBehaviour mTrackableBehaviour;
+	public Animation animation1;
 	public AudioClip MusicClip;
 	public AudioSource MusicSource;
 	public GameObject head;
@@ -30,6 +31,8 @@ ITrackableEventHandler
 		TrackableBehaviour.Status previousStatus,
 		TrackableBehaviour.Status newStatus)
 	{
+		Animation animation1 = GetComponent<Animation>();
+
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 			newStatus == TrackableBehaviour.Status.TRACKED ||
 			newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
@@ -42,6 +45,10 @@ ITrackableEventHandler
 			rightArm.SetActive(true);
 			leftLeg.SetActive(true);
 			rightLeg.SetActive(true);
+
+			if (!MusicSource) {
+				animation1.Stop();
+			}
 		}
 		else
 		{
@@ -54,5 +61,6 @@ ITrackableEventHandler
 			leftLeg.SetActive(false);
 			rightLeg.SetActive(false);
 		}
+			
 	}   
 }
